@@ -13,8 +13,10 @@
 - まず、QGISでGeoPackage形式のデータを読み込み、集計対象となる属性値に応じてフラグ立てをした属性項目を追加した上で、それをGeoJSON形式に変換
 - 次に、そのGeoJSONデータを[Tippecanoe](https://github.com/felt/tippecanoe)を使ってベクトルタイル化
     - その際に、クラスタリングするものとしないもので2種類のベクトルタイルを生成しています。それぞれの実行時パラメータは下記の通り。
-    > tippecanoe -zg -o ta_chiba_point.pmtiles --no-tile-compression --drop-densest-as-needed --extend-zooms-if-still-dropping ta_chiba_point.geojson
-    > tippecanoe -zg -o ta_chiba_flags_clustered.pmtiles --no-tile-compression -r1 --cluster-distance=50 --cluster-densest-as-needed --accumulate-attribute='{"case_flag":"sum", "night_flag":"sum", "junior_flag":"sum", "senior_flag":"sum", "pedestrian_flag":"sum"}' ta_chiba_flags.geojson
+        - クラスタリングなし
+        > tippecanoe -zg -o ta_chiba_point.pmtiles --no-tile-compression --drop-densest-as-needed --extend-zooms-if-still-dropping ta_chiba_point.geojson
+        - クラスタリングあり
+        > tippecanoe -zg -o ta_chiba_flags_clustered.pmtiles --no-tile-compression -r1 --cluster-distance=50 --cluster-densest-as-needed --accumulate-attribute='{"case_flag":"sum", "night_flag":"sum", "junior_flag":"sum", "senior_flag":"sum", "pedestrian_flag":"sum"}' ta_chiba_flags.geojson
 
 3. ウェブ地図の作成
 - [MapLibre GL JS](https://maplibre.org/projects/maplibre-gl-js/)によるウェブマップ化を実施
